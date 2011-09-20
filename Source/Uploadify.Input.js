@@ -5,6 +5,7 @@ Uploadify.Input = new Class({
 	Implements: [Events],
 	
 	initialize: function(uuid, input, generate, force) {
+		this.generator = generate;
 		this.files = [];
 		this.uuid  = uuid;
 		this.input = input;
@@ -15,16 +16,33 @@ Uploadify.Input = new Class({
 			if(!force) {
 				action = action.get('action');
 			} else {
-				action = generate(input);
+				action = this.generate(input);
 			}
 		} else {
 			this.isForm = false;
-			action = generate(input);
+			action = this.generate(input);
 		}
 		
-		this.action = action;
+		if(action) {
+			this.action = action;
+			this.create();
+		}
+	},
+	
+	generate: function(input) {
+		var info = this.generator(input);
+		if(typeof info == "object") {
+			if(info.hasOwnProperty('url')) {
+				var url = info.url;
+				delete info.url;
+				this.custom_fields = info;
+				return url;
+			}
+		} else if(typeof info == "string") {
+			return info;
+		}
 		
-		this.create();
+		return false;
 	},
 	
 	create: function() {

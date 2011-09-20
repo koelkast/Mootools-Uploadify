@@ -1,0 +1,11 @@
+Simple and still buggy html5 uploader (has no fallback for old browsers yet...)
+
+Options:
+	generateRequest: [Function] to create urls for requests, is used if file input is not inside a form
+		Should return string or Object with url key and extra POSTFIELDS
+	forceGenerator: [Boolean] force the generator function for each upload, even if it is inside a form
+	inputs: [String] CSS selector selecting inputs to use Uploadify on
+	queue: [String] CSS selector where progress should be dumped
+	autoStart: [Boolean] Autostart uploads? (there's no way to start them manually as of now)
+	fallback: [Boolean] Use HTML4 fallback support (Not implemented)
+	renderer: [Class] Link to a Mootools class to use as renderer (this renderer should then subscribe to queue events see source for info)	

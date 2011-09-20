@@ -18,7 +18,10 @@
 			window.addEvent('domready', function() {
 				new Uploadify.Register({
 					generateRequest: function(input) {
-						return '/Example/upload?v=' + Math.random()*100;
+						return {
+							url: '/Example/upload?v=' + Math.random()*100,
+							'sampleData': true
+						};
 					},
 					forceGenerator: true
 				});

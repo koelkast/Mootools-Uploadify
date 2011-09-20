@@ -10,7 +10,7 @@ Uploadify.Register = new Class({
 		autoStart: true,
 		fallback: false,
 		renderer: false,
-		generateRequest: function() { return '#fallbackurl'; },
+		generateRequest: function() { return ''; },
 		forceGenerator: false
 	},
 	
@@ -65,6 +65,7 @@ Uploadify.Register = new Class({
 	},
 	
 	uuid: function() {
+		// http://note19.com/2007/05/27/javascript-guid-generator/
 		var S4 = function() {
 			return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
 		};
@@ -72,7 +73,7 @@ Uploadify.Register = new Class({
 		return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 	},
 	
-	totally_unique_id: function() {
+	totally_unique_id: function() { // just to be sure
 		var uuid = this.uuid();
 		return this.inputs.hasOwnProperty(uuid)? this.totally_unique_id() : uuid;
 	}

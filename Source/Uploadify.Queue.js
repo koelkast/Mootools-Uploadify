@@ -31,6 +31,12 @@ Uploadify.Queue = new Class({
 			
 			request.uuid = uuid;
 			request.append(input.name, file);
+			
+			if(input.custom_fields) {
+				Object.keys(input.custom_fields).each(function(key) {
+					request.append(key, input.custom_fields[key]);
+				}.bind(this));
+			}
 
 			if(this.autoStart) {
 				request.send();
